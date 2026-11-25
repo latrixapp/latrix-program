@@ -1,0 +1,44 @@
+[package]
+name = "latrix-program"
+version = "0.1.0"
+edition.workspace = true
+description = "Latrix: Solana Privacy Rings balances that only a Falcon-512 key can move"
+license = "MIT"
+publish = false
+
+[lib]
+name = "latrix_program"
+crate-type = ["cdylib", "lib"]
+
+[features]
+default = []
+bpf-entrypoint = []
+no-entrypoint = []
+cpi = ["no-entrypoint"]
+devnet = []          # devnet program id (see lib.rs)
+
+[dependencies]
+pinocchio = { workspace = true, features = ["cpi"] }
+pinocchio-system = { workspace = true }
+solana-address = { workspace = true }
+solana-program-error = { workspace = true }
+solana-sha256-hasher = { workspace = true }
+solana-falcon512 = { workspace = true }
+thiserror = { workspace = true }
+
+# Off-chain (host tests, clients linking the crate) there is no sha256 syscall.
+[target.'cfg(not(target_os = "solana"))'.dependencies]
+solana-sha256-hasher = { workspace = true, features = ["sha2"] }
+
+[lints.rust.unexpected_cfgs]
+level = "allow"
+check-cfg = ['cfg(target_os, values("solana"))']
+
+[dev-dependencies]
+mollusk-svm = "0.17.1"
+solana-account = "5"
+solana-instruction = "4"
+solana-pubkey = { version = "4.2", features = ["curve25519"] }
+solana-sdk-ids = "3"
+pqcrypto-falcon = "0.4"
+pqcrypto-traits = "0.3"

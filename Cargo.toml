@@ -1,0 +1,20 @@
+[workspace]
+resolver = "2"
+members = ["program"]
+
+[workspace.package]
+edition = "2021"
+
+[workspace.dependencies]
+pinocchio = "0.11"
+pinocchio-system = "0.6"
+solana-address = { version = "2.7", features = ["curve25519"] }
+solana-program-error = "3.0"
+solana-sha256-hasher = "3"
+solana-falcon512 = "0.2.1"
+thiserror = "2.0"
+
+[profile.release]
+overflow-checks = true
+lto = "fat"
+codegen-units = 1
