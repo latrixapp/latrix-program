@@ -9,7 +9,8 @@ The on-chain program behind [latrix.app](https://latrix.app): a Solana launchpad
 | Program (mainnet) | `LTRXiaWWy3KbwiwMPCPu6QomafKrj12BPkpnAAwhNHD` |
 | Framework | [pinocchio](https://github.com/anza-xyz/pinocchio) (no Anchor) |
 | Falcon-512 verifier | [`solana-falcon512`](https://crates.io/crates/solana-falcon512) by Blueshift (MIT) |
-| Status | **not audited** |
+| Verified build | ✅ [Verified by OtterSec](https://verify.osec.io/status/LTRXiaWWy3KbwiwMPCPu6QomafKrj12BPkpnAAwhNHD): the deployed program is byte-for-byte this repository (commit `df7021c`) |
+| Security | two internal review rounds; no third-party audit yet |
 
 ## How it works
 
@@ -82,8 +83,9 @@ by anyone but the crank and inside the cooldown.
 solana-verify get-program-hash LTRXiaWWy3KbwiwMPCPu6QomafKrj12BPkpnAAwhNHD
 ```
 
-and compare it with a verifiable build of this repository (see the OtterSec verification on the program's explorer
-page).
+and compare it with a verifiable build of this repository (`84f63d47e7acec2bb5ff48adbb916e3fc34a68393ecb18ae6b116d812b03aeb7`
+at commit `df7021c`). OtterSec's builder did exactly that:
+[verify.osec.io/status/LTRXiaWWy3KbwiwMPCPu6QomafKrj12BPkpnAAwhNHD](https://verify.osec.io/status/LTRXiaWWy3KbwiwMPCPu6QomafKrj12BPkpnAAwhNHD).
 
 ## License
 
